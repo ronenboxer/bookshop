@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOwn</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="onInit()">
+    <header>
+        <h1>iOwn - Just manage it!</h1>
+        <h2>Read for speed</h2>
+    </header>
+    <div class="view-per-page"></div>
+    <button class="nav-bttn" title="open menu" onclick="onNavModal()"><iconify-icon width="2rem" inline icon="ant-design:menu-unfold-outlined"></iconify-icon></button>
+    <button class="add-bttn" title="add book" onclick="onAddModal()">
+        <iconify-icon width="2rem" inline icon="bx:message-square-add"></iconify-icon>
+    </button>
+    <section class="books-container"></section>
+    <footer></footer>
+
+    <div class="modals">
+        <section class="nav-modal">
+            <button class="close" title="close menu" onclick="onCloseModal('.nav-modal')">
+                <iconify-icon inline icon="carbon:close-filled">
+            </button>
+            <button class="view-bttn" onclick="onToggleViewMode()">
+                <iconify-icon title="cards dis[lay" class="cards-view" width="1.5rem" inline icon="fluent:table-simple-28-filled"></iconify-icon>
+                <iconify-icon title="table display" class="table-view" width="1.5rem" inline icon="fa6-solid:table-list"></iconify-icon>
+            </button>
+            
+            <span>Filter</span>
+            <form class="filter-by" onchange="onFilter(this)">
+                <label>Search</label>
+                <input name="txt" type="text" oninput="onFilter(this.parentElement.parentElement)" />
+                <label class="price-label"></label>
+                <input type="range" name="price" onmouseover="this.title=this.value+'$'">
+                <label> Lowest rating</label>
+                <input type="range" name="rate" min="0" max="10" value="0" title="0" onchange="this.title=this.value">
+            </form>
+            <br>
+            <span>Sort</span>
+            <select class="sort-by" onchange="onSort()">
+                <option value="">Select sort</option>
+                <option value="name">Title</option>
+                <option value="author">Author</option>
+                <option value="price">Price</option>
+                <option value="rate">Rating</option>
+                <option value="id">ID</option>
+            </select>
+            <label>Reverse order<input type="checkbox" class="sort-reverse" onchange="onSort()" /></label>
+        </section>
+        <section class="read-modal">
+            <button class="close" onclick="onCloseModal('.read-modal')">
+                <iconify-icon inline icon="carbon:close-filled">
+            </button>
+            <span></span>
+            </iconify-icon>
+            <p>
+            </p>
+            <div class="rate">
+            </div>
+        </section>
+        <section class="update-modal">
+            <button class="close" onclick="onCloseModal('.update-modal')">
+                <iconify-icon inline icon="carbon:close-filled">
+            </button>
+            </iconify-icon>
+            <div>
+            </div>
+        </section>
+        <section class="delete-modal">
+        </section>
+        <section class="add-modal">
+            <button class="close" onclick="onCloseModal('.add-modal')">
+                <iconify-icon inline icon="carbon:close-filled">
+            </button>
+            <form onsubmit="onCreateBook(event, this)">
+                <label>Name:<input type="text" name="name" placeholder="Book name" /></label>
+                <label>Author:<input type="text" name="author" placeholder="Book author" /></label>
+                <label>Price:<input type="text" name="price" placeholder="Book price" /></label>
+                <label>Cover Url:<input type="text" name="imgUrl" placeholder="Book cover" /></label>
+                <label>Is the book on sale? <input name="isOnSale" type="checkbox" /></label>
+                <button> Add book</button>
+            </form>
+        </section>
+    </div>
+    <div class="msg-modal"></div>
+    <script src="https://code.iconify.design/iconify-icon/1.0.0/iconify-icon.min.js"></script>
+    <script src="js/services/utils.service.js"></script>
+    <script src="js/services/storage.service.js"></script>
+    <script src="js/services/book.service.js"></script>
+    <script src="js/book.controler.js"></script>
+</body>
+
+</html>
